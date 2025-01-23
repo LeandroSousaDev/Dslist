@@ -15,6 +15,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String title;
+
     @Column (name = "game_year")
     private Integer year;
 
@@ -26,8 +28,10 @@ public class Game {
 
     private String imgUrl;
 
+    @Column(columnDefinition = "TEXT")
     private  String shortDescription;
 
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
     public Game() {
