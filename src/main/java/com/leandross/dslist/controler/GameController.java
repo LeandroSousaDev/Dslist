@@ -23,13 +23,13 @@ public class GameController {
 
     @GetMapping
     ResponseEntity<List<GameMinDTO>> findAll() {
-        var result = gameService.findAll();
+        var result = this.gameService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @GetMapping("/{id}")
     ResponseEntity<GameDTO> findById(@PathVariable("id") String id) {
-        var result = gameService.findById(Integer.valueOf(id));
+        var result = this.gameService.findById(Integer.valueOf(id));
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
