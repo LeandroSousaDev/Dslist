@@ -7,6 +7,7 @@ import com.leandross.dslist.repository.GameListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,18 +24,19 @@ public class GameListService {
     public GameListBelongingDTO findById(Integer id) {
         var result = this.gameListRepository.findById(id).get();
 
+        var orderedList = result.getBelongings()
+                .stream()
+                .sorted((o1, o2) -> o1.getPosition().compareTo(o2.getPosition())).toList();
+
         return new GameListBelongingDTO(
                 result.getId(),
                 result.getName(),
-                result.getBelongings()
-                        .stream()
-                        .map(x -> new GameMinDTO(
-                                x.getGame().getId(),
-                                x.getGame().getTitle(),
-                                x.getGame().getYear(),
-                                x.getGame().getImgUrl(),
-                                x.getGame().getShortDescription()))
-                        .toList());
+                orderedList.stream().map(x -> new GameMinDTO(
+                        x.getGame().getId(),
+                        x.getGame().getTitle(),
+                        x.getGame().getYear(),
+                        x.getGame().getImgUrl(),
+                        x.getGame().getShortDescription())).toList());
     }
 
 }
