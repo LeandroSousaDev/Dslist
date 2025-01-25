@@ -1,11 +1,13 @@
 package com.leandross.dslist.controler;
 
+import com.leandross.dslist.dto.GameListBelongingDTO;
 import com.leandross.dslist.dto.GameListDTO;
 import com.leandross.dslist.service.GameListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,12 @@ public class GameListController {
     @GetMapping
     ResponseEntity<List<GameListDTO>> findAll() {
         var result = this.gameListService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity<GameListBelongingDTO> findById(@PathVariable("id") String id) {
+        var result = this.gameListService.findById(Integer.valueOf(id));
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
