@@ -1,9 +1,10 @@
 package com.leandross.dslist.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_game_list")
@@ -16,24 +17,15 @@ public class GameList {
 
     private String name;
 
+    @OneToMany(mappedBy = "gameList")
+    private List<Belonging> belongings = new ArrayList<>();
+
     public GameList() {
     }
 
-    public GameList(Integer id, String name) {
+    public GameList(Integer id, String name, List<Belonging> belongings) {
         this.id = id;
         this.name = name;
+        this.belongings = belongings;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        GameList gameList = (GameList) o;
-        return Objects.equals(id, gameList.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
 }

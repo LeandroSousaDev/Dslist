@@ -2,7 +2,6 @@ package com.leandross.dslist.controler;
 
 import com.leandross.dslist.dto.GameDTO;
 import com.leandross.dslist.dto.GameMinDTO;
-import com.leandross.dslist.dto.GameMinDTO2;
 import com.leandross.dslist.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -15,6 +15,6 @@ public class GameListService {
 
     public List<GameListDTO> findAll() {
         var result = this.gameListRepository.findAll();
-        return result.stream().map(GameListDTO::new).toList();
+        return result.stream().map(x -> new GameListDTO(x.getId(), x.getName())).toList();
     }
 }
